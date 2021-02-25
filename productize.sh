@@ -1,9 +1,12 @@
 #!/bin/bash -e
 
-GH_BOM_BRANCH="7.5.x"
+GH_BOM_BRANCH="7.4.x"
 GH_PROD_BRANCH="$GH_BOM_BRANCH-devel"
 GH_PROD_VERSION=$(curl -s https://raw.githubusercontent.com/redhat-developer/redhat-sso-boms/$GH_BOM_BRANCH/pom.xml | grep -m1 "<version>" | sed 's/<[^>]*>//g' | tr -d ' ')
 KEYCLOAK_VERSION=$(curl -s https://raw.githubusercontent.com/redhat-developer/redhat-sso-boms/$GH_BOM_BRANCH/pom.xml | grep -m1 "<version.keycloak>" | sed 's/<[^>]*>//g' | tr -d ' ')
+
+echo $GH_PROD_VERSION
+echo $KEYCLOAK_VERSION
 
 if [ "$GH_USER_NAME" != "" ] && [ "$GH_USER_EMAIL" != "" ] && [ "$GH_TOKEN" != "" ] && [ "$GH_REF" != "" ]; then
     DRY_RUN="false"
